@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cognitive Decline Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<style>
+  body {
+    background: linear-gradient(to right, #dfe9f3, #ffffff);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+
+  form {
+    background-color: #f8f9fa;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #34495e;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="number"]:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  button {
+    margin-top: 25px;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #2c80b4;
+    transform: translateY(-2px);
+  }
+
+  .footer {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #777;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    form {
+      padding: 20px;
+    }
+  }
+</style>
+
+
+<body>
+    <h2>Predict Cognitive Decline</h2>
+    <form method="POST" action="/predict">
+
+        <label>Anemia Treatment (Yes=1, No=2):<br>
+            <select name="MCQ053" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Sleep Disorder (Yes=1, No=2):<br>
+            <select name="SLQ060" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Gender:<br>
+            <select name="RIAGENDR" required>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+            </select>
+        </label><br><br>
+
+        <label>Age (years):<br>
+            <input type="number" name="RIDAGEYR" min="0" max="120" required />
+        </label><br><br>
+
+        <label>Race/Ethnicity (1-6):<br>
+            <select name="RIDRETH3" required>
+                <option value="1">Mexican American</option>
+                <option value="2">Other Hispanic</option>
+                <option value="3">Non-Hispanic White</option>
+                <option value="4">Non-Hispanic Black</option>
+                <option value="5">Other Race - Including Multi-Racial</option>
+                <option value="6">Non-Hispanic Asian</option>
+            </select>
+        </label><br><br>
+
+        <label>Income Level (1-13):<br>
+            <select name="INDHHIN2" required>
+                <option value="1">Under $5,000</option>
+                <option value="2">$5,000-$9,999</option>
+                <option value="3">$10,000-$14,999</option>
+                <option value="4">$15,000-$19,999</option>
+                <option value="5">$20,000-$24,999</option>
+                <option value="6">$25,000-$34,999</option>
+                <option value="7">$35,000-$44,999</option>
+                <option value="8">$45,000-$54,999</option>
+                <option value="9">$55,000-$64,999</option>
+                <option value="10">$65,000-$74,999</option>
+                <option value="11">$75,000 and over</option>
+                <option value="12">Refused</option>
+                <option value="13">Don't know</option>
+            </select>
+        </label><br><br>
+
+        <label>High Blood Pressure (Yes=1, No=2):<br>
+            <select name="BPQ020" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>High Cholesterol (Yes=1, No=2):<br>
+            <select name="BPQ080" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Diabetes (Yes=1, No=2):<br>
+            <select name="DIQ010" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Minutes Sedentary per Day:<br>
+            <input type="number" name="PAD680" min="0" max="1440" required />
+        </label><br><br>
+
+        <label>Chest Pain or Discomfort (Yes=1, No=2):<br>
+            <select name="CDQ001" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Feeling Down/Depressed (Frequency 0-27):<br>
+            <input type="number" name="DPQ020" min="0" max="27" required />
+        </label><br><br>
+
+        <label>Overweight (Yes=1, No=2):<br>
+            <select name="MCQ080" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Memory Issues (Yes=1, No=2):<br>
+            <select name="MCQ084" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Cancer (Yes=1, No=2):<br>
+            <select name="MCQ220" required>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </label><br><br>
+
+        <label>Diet Healthiness Score (1-5):<br>
+            <input type="number" name="DBQ700" min="1" max="5" step="1" required />
+        </label><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
