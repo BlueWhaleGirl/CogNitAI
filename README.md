@@ -47,17 +47,19 @@ These insights informed feature selection and model optimization prior to deploy
 
 ---
 
-## 📁 Project Structure
+### 📁 Project Structure
 
+```text
 CogNitAI_aub/
 │
-├── app.py                  # Flask backend
-├── model.ipynb             # Model training + EDA
-├── models/                 # Saved ML models
-├── data/                   # Dataset files
-├── static/                 # CSS / assets
-├── templates/              # HTML pages
+├── app.py              # Flask backend
+├── model.ipynb         # Model training + EDA
+├── models/             # Saved ML models
+├── data/               # Dataset files
+├── static/             # CSS / assets
+├── templates/          # HTML pages
 └── requirements.txt
+```
 
 ---
 
